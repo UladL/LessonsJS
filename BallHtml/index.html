@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello</title>
+</head>
+<body>
+<canvas id="canvas" width="400" height="400"></canvas>
+<script src="https://code.jquery.com/jquery-2.1.0.js"></script>
+
+<script>
+var canvas = document.getElementById("canvas"); //  подключаем конву
+var ctx = canvas.getContext("2d")  // 2д тип
+var width = canvas.width  // width будет равняться width канвы (размер)
+var height = canvas.height //  тоже самое с у
+
+var circle = function (x,y,radius, fillCircle ){ // функция рисуем круг
+    ctx.beginPath() // ничинаем путь
+    ctx.arc(x,y,radius,0, Math.PI * 2, false ); // рисуем круг, х и у и радиюс жто все аргументы кторые будут иметь разгые зниачения
+      if (fillCircle){ //  если филл круг тогда
+        ctx.fill(); // закрасить круг
+    }else{ // иначе
+      ctx.stroke(); //  только контур
+    }
+};
+
+var ball = function () { // еще одна функция
+    this.x = width / 2; // будем появлятья в центре
+    this.y = height / 2;// тоже
+    this.xSpeed = 5; // ставим начаоьную скорость 5 по х
+    this.ySpeed = 0; //  и 0 по у
+};
+    ball.prototype.move = function (){ //  опять функция но с прототайп что значит это функия будет вместе с другими
+    this.x += this.xSpeed // х будет плюсоваться и ехать в право
+        this.y += this.ySpeed //  тоже но у
+        if (this.x < 0 ){//  если меньшк нуля тогда
+            this.x = width //  х станет равняться 400 тоесть появится на друой строне экрана
+    }else if (this.x > width){ //  иначе если х больше 400
+            this.x = 0 // х станет 0 тоесть появиться на другой стороне экрана
+        } // пусто
+        if (this.y < 0 ){ // если у меньше нуля тогда
+            this.y = height // у = 400
+        }else if (this.y > height){ //  если у больше 400 тогда
+            this.y = 0; // у = 0
+        } // пусто
+    }; //  тоже
+
+ball.prototype.draw = function (){ // создаем метод draw для мача в прототайпе
+ circle(this.x, this.y, 10, true ) //  рисуем круг закрашенный с разнами кардинатами кждый раз
+}
+/*
+  создвем метод setDirection и функцию в нем с агументом, котороя определят как двигаться
+  нашему мячу.
+ */
+ball.prototype.setDirection = function (direction) {
+    if (direction === "up") {
+        this.xSpeed = 0
+        this.ySpeed = -5
+    } else if (direction === "down") {
+        this.xSpeed = 0
+        this.ySpeed = 5
+    } else if (direction === "left") {
+        this.xSpeed = -5
+        this.ySpeed = 0
+    } else if (direction === "right") {
+        this.xSpeed = 5
+        this.ySpeed = 0
+    } else if (direction === "stop") {
+        this.xSpeed = 0
+        this.ySpeed = 0
+    }
+}
+var ball = new ball();
+var keyActions = {
+    32: "stop",
+    37: "left",
+    38: "up",
+    39: "right",
+    40: "down"
+}
+$("body").keydown(function (event){
+var direction = keyActions[event.keyCode]
+    ball.setDirection(direction)
+})
+
+setInterval(function (){
+   ctx.clearRect(0,0,width,height)
+   ball.draw()
+    ball.move()
+    ctx.strokeRect(0,0,width,height)
+},30)
+</script>
+</body>
+</html>
