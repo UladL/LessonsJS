@@ -47,6 +47,7 @@ var limoParams = {
     mileage: 21120
 }
 
+
 var limo = new Car(limoParams) ;
 var limoDog = new Dog("Rhapsody In Blue", "Poodle", 40);
 
@@ -61,7 +62,7 @@ var chevyParams = {
     model: "Bel Air",
     year: 1957,
     color: "red",
-    passengers: 2,
+    passengers: 7,
     convertible: false,
     mileage: 1021
 }
