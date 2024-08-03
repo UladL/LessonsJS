@@ -1,0 +1,15 @@
+{
+	"folders": [
+		{
+			"name": "LessonsJS",
+			"path": "."
+		},
+		{
+			"name": "eye-icons",
+			"path": "../../../Downloads/eye-icons"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "LessonsJS"
+	}
+}

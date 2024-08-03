@@ -81,7 +81,7 @@ rosie.deployLazer();
 */
 
 // first we check if fido has sitting at all. If yes then already sitting. if not we go and get it from prototypr and then change it from true toi false
-/*function Dog(name, breed, weight) {
+function Dog(name, breed, weight) {
     this.name = name;
     this.breed = breed;
     this.weight = weight;
@@ -111,30 +111,45 @@ Dog.prototype.sit = function() {
     }
 };
 
+
+function ShowDog(name, breed, weight, handler) {
+  Dog.call(this, name , breed, weight) // a method that can be used with any function. Dog.call is calling Dog function giving it name breed and weight but not handler beause dog doesnt have it
+    this.handler = handler;
+}
+
+
+ShowDog.prototype = new Dog();
+ShowDog.prototype.constructor = ShowDog;
+
+ShowDog.prototype.league = "Webville";
+ShowDog.prototype.stack = function(){
+console.log("Stack");
+};
+ShowDog.prototype.bait = function () {
+console.log("Bait");
+};
+ShowDog.prototype.gait = function (kind) {
+console.log (kind + "ing");
+};
+ShowDog.prototype. groom = function () {
+console.log ("Groom");
+}
+
+
 var fido = new Dog("Fido", "Mixed", 38);
 var fluffy = new Dog("Fluffy", "Poodle", 30);
 var spot = new Dog("Spot", "Chihuahua", 10);
+var scotty = new ShowDog("Scotty", "Scottish Terrier", 15, "Cookie");
+var beatrice = new ShowDog("Beatrice", "Pomeranian", 5, "Hamilton");
 
 fido.bark();
-fido.run();
-fido.wag();
-
 fluffy.bark();
-fluffy.run();
-fluffy.wag();
-
-spot.sit();
-spot.sit();
-
-
-fluffy.sit();
-fluffy.sit();
-
-spot.hasOwnProperty("sitting"); // If true uses own example else if false than uses prototype
-spot.sitting = true;
-spot.hasOwnProperty("sitting");
-fido.hasOwnProperty("sitting")*/
-
+spot.bark();
+scotty.bark();
+beatrice.bark();
+scotty.gait("Walk");
+beatrice.groom();
+/*
 function SpaceRobot(name, year, owner, homePlanet) {
     this.name = name;
     this.year = year;
@@ -155,4 +170,4 @@ console.log(c3po.name + " was made by " + c3po.maker);
 var simon = new SpaceRobot("Simon", 2009, "Carla Diana", "Earth");
 simon.makeCoffee();
 simon.blinkLights();
-simon.speak();
+simon.speak();*/
